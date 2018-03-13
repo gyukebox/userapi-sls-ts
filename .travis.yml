@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "node"
+  - 6
+
+before_install:
+  - npm install -g npm
+  - npm install -g yarn
+
+cache: yarn
+
+install:
+  - yarn install
+
+scripts:
+  - yarn test
