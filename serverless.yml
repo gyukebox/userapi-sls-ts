@@ -11,15 +11,8 @@ provider:
   runtime: nodejs6.10
 
 functions:
-  hello:
-    handler: src/handler.hello
-    events:
-      - http:
-          method: get
-          path: hello
-
   create:
-    handler: src/handlers/create.create
+    handler: src/handler.create
     events:
       - http:
           method: post

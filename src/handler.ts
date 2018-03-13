@@ -1,13 +1,8 @@
 import { APIGatewayEvent, Callback, Context, Handler } from 'aws-lambda';
+import { Users } from './models/users';
+import { generateUserParams } from './utils';
 
-export const hello: Handler = (event: APIGatewayEvent, context: Context, cb: Callback) => {
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless Webpack (Typescript) v1.0! Your function executed successfully!',
-      input: event,
-    }),
-  };
-
-  cb(null, response);
+export const create: Handler = (event: APIGatewayEvent, context: Context, callback: Callback) => {
+  const user = new Users(generateUserParams(event.body));
+  user.save(callback);
 };
