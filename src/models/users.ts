@@ -1,20 +1,59 @@
+import { Callback } from 'aws-lambda';
 import { DynamoDB } from 'aws-sdk';
+import { InsertionParameter, ScanParameter } from '..';
 import { database, docClient } from '../config';
 import { generateResponse } from '../utils';
 
-export class Users {
-  private params: DynamoDB.DocumentClient.PutItemInput;
+export class UserModel {
+  private insertParams: InsertionParameter;
+  private scanParams: ScanParameter;
 
-  constructor(params) {
-    this.params = params;
+  constructor(insertParams?: InsertionParameter, scanParams?: ScanParameter) {
+    this.insertParams = insertParams;
+    this.scanParams = scanParams;
   }
 
-  public save(callback) {
-    docClient.put(this.params, (err, result) => {
+  public save(callback: Callback) {
+    docClient.put(this.insertParams, (err, result) => {
       if (err) {
-        callback(err);
+        callback(null, generateResponse(400, {
+          message: 'Something went wrong',
+          detail: err,
+        }));
       } else {
         callback(null, generateResponse(200, { message: 'Insertion successful!' }));
+      }
+    });
+  }
+
+  public findOne(callback: Callback) {
+    docClient.scan(this.scanParams, (err, result) => {
+      if (err) {
+        callback(null, generateResponse(400, {
+          message: 'Something went wrong',
+          detail: err,
+        }));
+      } else {
+        callback(null, generateResponse(200, {
+          message: 'Scanning single item successful!',
+          detail: result,
+        }));
+      }
+    });
+  }
+
+  public findAll(callback: Callback) {
+    docClient.scan(this.scanParams, (err, result) => {
+      if (err) {
+        callback(null, generateResponse(400, {
+          message: 'Something went wrong',
+          detail: err,
+        }));
+      } else {
+        callback(null, generateResponse(200, {
+          message: 'Scanning all items successful!',
+          detail: result,
+        }));
       }
     });
   }
