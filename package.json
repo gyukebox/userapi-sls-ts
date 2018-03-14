@@ -1,5 +1,5 @@
 {
-  "name": "sls-ts-sample",
+  "name": "userapi-sls-ts",
   "version": "1.0.0",
   "description": "Simple user API using Serverless & TypeScript",
   "main": "handler.js",
