@@ -3,11 +3,9 @@ node_js: 6
 
 jobs:
   include:
-    - stage: install
+    - stage: build
       cache: yarn
-      script: ./scripts/install.sh
-    - stage: test
-      script: ./scripts/test.sh
+      script: ./scripts/build.sh
     - stage: deploy
       if: branch = master
       node_js: 6
