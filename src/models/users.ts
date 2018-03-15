@@ -1,20 +1,21 @@
 import { Callback } from 'aws-lambda';
 import { DynamoDB } from 'aws-sdk';
 import { InsertionParameter, ScanParameter } from '..';
-import { database, docClient } from '../config';
 import { generateResponse } from '../utils';
 
 export class UserModel {
   private insertParams: InsertionParameter;
   private scanParams: ScanParameter;
+  private database: DynamoDB.DocumentClient;
 
   constructor(insertParams?: InsertionParameter, scanParams?: ScanParameter) {
     this.insertParams = insertParams;
     this.scanParams = scanParams;
+    this.database = new DynamoDB.DocumentClient();
   }
 
   public save(callback: Callback) {
-    docClient.put(this.insertParams, (err, result) => {
+    this.database.put(this.insertParams, (err, result) => {
       if (err) {
         callback(null, generateResponse(400, {
           message: 'Something went wrong',
@@ -27,7 +28,7 @@ export class UserModel {
   }
 
   public findOne(callback: Callback) {
-    docClient.scan(this.scanParams, (err, result) => {
+    this.database.scan(this.scanParams, (err, result) => {
       if (err) {
         callback(null, generateResponse(400, {
           message: 'Something went wrong',
@@ -43,7 +44,7 @@ export class UserModel {
   }
 
   public findAll(callback: Callback) {
-    docClient.scan(this.scanParams, (err, result) => {
+    this.database.scan(this.scanParams, (err, result) => {
       if (err) {
         callback(null, generateResponse(400, {
           message: 'Something went wrong',
