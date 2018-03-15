@@ -10,3 +10,7 @@ jspm_packages
 
 # Error logs
 yarn-error.log
+
+# IDE and editor
+.idea/
+.vscode/
