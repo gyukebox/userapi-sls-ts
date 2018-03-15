@@ -4,7 +4,8 @@
   "description": "Simple user API using Serverless & TypeScript",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"No test specified :(\" && exit 0"
+    "test": "echo \"No test specified :(\" && exit 0",
+    "devstart": "SLS_DEBUG=* sls offline start"
   },
   "devDependencies": {
     "@types/aws-lambda": "0.0.22",

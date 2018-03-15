@@ -1,7 +1,7 @@
 import { DynamoDB, SharedIniFileCredentials } from 'aws-sdk';
 
 const configuration: DynamoDB.ClientConfiguration = {
-  credentials: new SharedIniFileCredentials({ profile: 'gyukebox' }),
+  credentials: new SharedIniFileCredentials({ profile: 'default' }),
   region: 'ap-northeast-2',
   endpoint: 'dynamodb.ap-northeast-2.amazonaws.com',
 };
