@@ -2,21 +2,24 @@ import { APIGatewayEvent } from 'aws-lambda';
 import { DynamoDB } from 'aws-sdk';
 
 import * as uuid from 'uuid/v1';
-import { InsertionParameter, LambdaHttpResponse, ScanParameter, UserInfo } from './index';
+import {
+  InsertionParameter, LambdaHttpResponse, ScanParameter,
+  UpdateParameter, UpdateRequestBody, UserInfo,
+} from './index';
 
 export function generateUserParams(body: string): InsertionParameter {
   const newUser: UserInfo = JSON.parse(body);
   newUser.uuid = uuid();
 
   return {
-    TableName: 'sample-userdb',
+    TableName: 'sample-user-db',
     Item: newUser,
   };
 }
 
 export function generateScanParams(body?: string | null, query = false): ScanParameter {
   const parameter: ScanParameter = {
-    TableName: 'sample-userdb',
+    TableName: 'sample-user-db',
   };
 
   if (query) {
@@ -31,9 +34,22 @@ export function generateScanParams(body?: string | null, query = false): ScanPar
   return parameter;
 }
 
-export function generateResponse(status: number, body: object): LambdaHttpResponse {
-  return {
-    statusCode: status,
-    body: JSON.stringify(body),
+export function generateUpdateParams(body: UpdateRequestBody) {
+  const parameter: UpdateParameter = {
+    TableName: 'sample-user-db',
+    Key: {
+      username: body.original.username,
+    },
+    UpdateExpression: 'set password=:newpw',
+    ExpressionAttributeValues: {
+      ':newpw': body.new.password,
+    },
+    ReturnValues: 'UPDATED_NEW',
   };
+
+  return parameter;
+}
+
+export function generateResponse(statusCode: number, body: object): LambdaHttpResponse {
+  return { statusCode, body };
 }

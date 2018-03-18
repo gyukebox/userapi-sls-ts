@@ -3,24 +3,21 @@ import { UserModel } from './models/users';
 import { generateResponse, generateScanParams, generateUserParams } from './utils';
 
 export const create: Handler = (event: APIGatewayEvent, context: Context, callback: Callback) => {
-  const user = new UserModel(generateUserParams(event.body));
-  user.save(callback);
+  new UserModel(event.body).save(callback);
 };
 
 export const retrieve: Handler = (event: APIGatewayEvent, context: Context, callback: Callback) => {
-  const user = new UserModel(null, generateScanParams(event.body, true));
-  user.findOne(callback);
+  new UserModel(event.body).findOne(callback);
 };
 
 export const retrieveAll: Handler = (event: APIGatewayEvent, context: Context, callback: Callback) => {
-  const user = new UserModel(null, generateScanParams());
-  user.findAll(callback);
+  new UserModel(event.body).findAll(callback);
 };
 
 export const update: Handler = (event: APIGatewayEvent, context: Context, callback: Callback) => {
-  callback(null, generateResponse(200, JSON.parse(event.body)));
+  new UserModel(event.body).findAndUpdate(callback);
 };
 
 export const remove: Handler = (event: APIGatewayEvent, context: Context, callback: Callback) => {
-  callback(null, generateResponse(200, JSON.parse(event.body)));
+  new UserModel(event.body).findAndDelete(callback);
 };
