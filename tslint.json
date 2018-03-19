@@ -10,15 +10,13 @@
             "spaces"
         ],
         "interface-name": false,
-        "no-console": [
-            true,
-            "warning"
-        ],
+        "no-console": false,
         "object-literal-sort-keys": false,
         "quotemark": [
             true,
             "single"
-        ]
+        ],
+        "variable-name": false
     },
     "rulesDirectory": []
 }

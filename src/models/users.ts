@@ -4,22 +4,29 @@ import { DeleteParameter, InsertionParameter, ScanParameter } from '..';
 import { generateResponse, generateScanParams, generateUpdateParams, generateUserParams } from '../utils';
 
 export class UserModel {
-  private database: DynamoDB.DocumentClient;
-  private tableName: string;
-  private reqBody: string;
+  private _database: DynamoDB.DocumentClient;
+  private _tableName: string;
+  private _reqBody: string;
+  private _region: string;
 
-  constructor(reqBody: string) {
-    this.database = new DynamoDB.DocumentClient({
-      region: 'ap-northeast-2',
-    });
-    this.tableName = 'sample-user-db';
-    this.reqBody = reqBody;
+  constructor(_region: string, _reqBody: string) {
+    this._database = new DynamoDB.DocumentClient({ region: _region });
+    this._tableName = 'sample-user-db';
+    this._reqBody = _reqBody;
+  }
+
+  get database(): DynamoDB.DocumentClient {
+    return this._database;
+  }
+
+  get reqBody(): string {
+    return this._reqBody;
   }
 
   public save(callback: Callback) {
-    const params = generateUserParams(this.reqBody);
+    const params = generateUserParams(this._reqBody);
 
-    this.database.put(params, (err, result) => {
+    this._database.put(params, (err, result) => {
       if (err) {
         console.error(err);
         callback(null, generateResponse(400, {
@@ -34,9 +41,9 @@ export class UserModel {
   }
 
   public findOne(callback: Callback) {
-    const params = generateScanParams(this.reqBody, true);
+    const params = generateScanParams(this._reqBody, true);
 
-    this.database.scan(params, (err, result) => {
+    this._database.scan(params, (err, result) => {
       if (err) {
         console.error(err);
         callback(null, generateResponse(400, {
@@ -56,7 +63,7 @@ export class UserModel {
   public findAll(callback: Callback) {
     const params = generateScanParams();
 
-    this.database.scan(params, (err, result) => {
+    this._database.scan(params, (err, result) => {
       if (err) {
         console.error(err);
         callback(null, generateResponse(400, {
@@ -74,9 +81,9 @@ export class UserModel {
   }
 
   public findAndUpdate(callback: Callback) {
-    const params = generateUpdateParams(JSON.parse(this.reqBody));
+    const params = generateUpdateParams(JSON.parse(this._reqBody));
 
-    this.database.update(params, (err, result) => {
+    this._database.update(params, (err, result) => {
       if (err) {
         console.error(err);
         callback(null, generateResponse(400, {
@@ -94,15 +101,15 @@ export class UserModel {
   }
 
   public findAndDelete(callback: Callback) {
-    const parsedBody = JSON.parse(this.reqBody);
+    const parsedBody = JSON.parse(this._reqBody);
     const params: DeleteParameter = {
-      TableName: this.tableName,
+      TableName: this._tableName,
       Key: {
         username: parsedBody.username,
       },
     };
 
-    this.database.delete(params, (err, result) => {
+    this._database.delete(params, (err, result) => {
       if (err) {
         console.error(err);
         callback(null, generateResponse(400, {

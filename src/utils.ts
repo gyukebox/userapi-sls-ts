@@ -3,8 +3,12 @@ import { DynamoDB } from 'aws-sdk';
 
 import * as uuid from 'uuid/v1';
 import {
-  InsertionParameter, LambdaHttpResponse, ScanParameter,
-  UpdateParameter, UpdateRequestBody, UserInfo,
+  InsertionParameter,
+  LambdaHttpResponse,
+  ScanParameter,
+  UpdateParameter,
+  UpdateRequestBody,
+  UserInfo,
 } from './index';
 
 export function generateUserParams(body: string): InsertionParameter {
