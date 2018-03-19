@@ -6,9 +6,19 @@
   version "0.0.22"
   resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-0.0.22.tgz#48ab7d4f816d1c1c72ed7286c4b73f21f0497219"
 
+"@types/node@*":
+  version "9.4.7"
+  resolved "http://registry.npmjs.org/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
+
 "@types/node@^8.0.57":
   version "8.9.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.9.5.tgz#162b864bc70be077e6db212b322754917929e976"
+
+"@types/uuid@^3.4.3":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-3.4.3.tgz#121ace265f5569ce40f4f6d0ff78a338c732a754"
+  dependencies:
+    "@types/node" "*"
 
 abbrev@1:
   version "1.1.1"

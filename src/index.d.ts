@@ -6,6 +6,8 @@ import { DynamoDB } from "aws-sdk";
 
 export type InsertionParameter = DynamoDB.DocumentClient.PutItemInput;
 export type ScanParameter = DynamoDB.DocumentClient.ScanInput;
+export type UpdateParameter = DynamoDB.DocumentClient.UpdateItemInput;
+export type DeleteParameter = DynamoDB.DocumentClient.DeleteItemInput;
 
 export interface UserInfo {
   uuid?: string;
@@ -14,9 +16,16 @@ export interface UserInfo {
   email?: string;
 }
 
+export interface UpdateRequestBody {
+  original: UserInfo;
+  new: {
+    password: string;
+  };
+}
+
 export interface LambdaHttpResponse {
   statusCode: number;
-  body: string;
+  body: string | object;
 }
 
 export as namespace userapi_sls_ts;

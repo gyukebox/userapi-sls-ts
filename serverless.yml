@@ -47,22 +47,3 @@ functions:
       - http:
           method: delete
           path: users/delete
-  resources:
-    Resources:
-      UsersTable:
-        Type: AWS::DynamoDB::Table	
-        Properties:	
-          TableName: sample-userdb	
-          AttributeDefinitions:	
-            - AttributeName: uuid	
-              AttributeType: S	
-            - AttributeName: username	
-              AttributeType: S	
-          KeySchema:	
-            - AttributeName: uuid	
-              KeyType: HASH	
-            - AttributeName: username	
-              KeyType: RANGE	
-          ProvisionedThroughput:	
-            ReadCapacityUnits: 5	
-            WriteCapacityUnits: 5 
