@@ -35,21 +35,20 @@ $ sls offline start
 
 ## Try Remote Access
 
-This sample application is deployed to AWS Lambda: [URL]()  
+This sample application is deployed to AWS Lambda: [URL](https://gax3g1mpel.execute-api.ap-northeast-2.amazonaws.com/prod/users)  
 You can send request(s) via `cURL` or `httpie`, or just invoke handlers via:
 
 ```
 $ sls invoke -f <func-name>
 ```
 
-## Sample API Reference
-Mock API Documentation is available via wiki
+## API Reference & Postman collection
+
+Available [here](https://documenter.getpostman.com/view/3135479/sample-user-api-with-serverless-typescript/RVnZgxw9)
+
 
 ## WIP
-
-- [ ] Make documentation available via remote URL
 - [ ] Create test environment
-- [ ] Integrate CI and enable auto-deploy
 
 ## License
 MIT
