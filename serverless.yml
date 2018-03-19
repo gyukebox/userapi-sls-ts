@@ -12,8 +12,7 @@ provider:
   profile: default
   region: ap-northeast-2
   stage: prod
-  role: arn:aws:iam::172467735284:user/gyukebox
-  cfnrole: arn:aws:iam::172467735284:user/gyukebox
+  role: arn:aws:iam::172467735284:role/userapi-sls-ts-dev-ap-northeast-2-lambdaRole
 
 functions:
   create:

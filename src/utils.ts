@@ -51,5 +51,8 @@ export function generateUpdateParams(body: UpdateRequestBody) {
 }
 
 export function generateResponse(statusCode: number, body: object): LambdaHttpResponse {
-  return { statusCode, body };
+  return {
+    statusCode,
+    body: JSON.stringify(body),
+  };
 }

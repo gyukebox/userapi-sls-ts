@@ -25,7 +25,7 @@ export interface UpdateRequestBody {
 
 export interface LambdaHttpResponse {
   statusCode: number;
-  body: string | object;
+  body: string;
 }
 
 export as namespace userapi_sls_ts;
