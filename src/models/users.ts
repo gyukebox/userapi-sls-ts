@@ -21,7 +21,7 @@ export class UserModel {
 
     this.database.put(params, (err, result) => {
       if (err) {
-        console.error(`Error during insertion: ${err}`);
+        console.error(err);
         callback(null, generateResponse(400, {
           message: 'Something went wrong',
           detail: err,
@@ -38,7 +38,7 @@ export class UserModel {
 
     this.database.scan(params, (err, result) => {
       if (err) {
-        console.error(`Error during querying: ${err}`);
+        console.error(err);
         callback(null, generateResponse(400, {
           message: 'Something went wrong',
           detail: err,
@@ -58,7 +58,7 @@ export class UserModel {
 
     this.database.scan(params, (err, result) => {
       if (err) {
-        console.error(`Error during querying: ${err}`);
+        console.error(err);
         callback(null, generateResponse(400, {
           message: 'Something went wrong',
           detail: err,

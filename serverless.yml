@@ -11,6 +11,9 @@ provider:
   runtime: nodejs6.10
   profile: default
   region: ap-northeast-2
+  stage: prod
+  role: arn:aws:iam::172467735284:user/gyukebox
+  cfnrole: arn:aws:iam::172467735284:user/gyukebox
 
 functions:
   create:
